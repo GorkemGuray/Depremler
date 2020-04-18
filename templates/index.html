@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}Anasayfa{% endblock title %}
+
+{% block body %}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Tarih</th>
+                <th scope="col">Saat</th>
+                <th scope="col">Enlem(N)-Boylam(E)</th>
+                <th scope="col">Derinlik(Km)</th>
+                <th scope="col">Büyüklük(Ml)</th>
+                <th scope="col">Yer</th>
+                <th scope="col">Yer Açıklaması</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in range(length)  %}
+            <tr {% if depremler[i]["buyukluk"]>=4 and depremler[i]["buyukluk"]<5 %}class="table-warning"{% endif %}
+            {% if depremler[i]["buyukluk"]>=5 %}class="table-danger"{% endif %}>            
+                <th scope="row">{{i+1}}</th>
+                <td>{{depremler[i]["tarih"]}}</td>
+                <td>{{depremler[i]["saat"]}}</td>
+                <td><a href="https://maps.google.com/?q={{depremler[i]["enlem"]}},{{depremler[i]["boylam"]}}&ll={{depremler[i]["enlem"]}},{{depremler[i]["boylam"]}}&z=9" target="_blank">{{depremler[i]["enlem"]}}-{{depremler[i]["boylam"]}}</a></td>
+                <td>{{depremler[i]["derinlik"]}}</td>
+                <td>{{depremler[i]["buyukluk"]}}</td>
+                <td>{{depremler[i]["yer"]}}</td>
+                <td>{{depremler[i]["yer-aciklama"]}}</td>
+            </tr>
+        {% endfor %}
+            
+        </tbody>
+    </table>
+
+
+
+
+{% endblock body %}
